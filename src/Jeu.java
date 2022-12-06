@@ -42,7 +42,7 @@ public class Jeu {
 
                         //imaginons qu'il y a 1 potion sur le monstre
                         Hero.gainPointDeVie(3);
-                        System.out.println(Hero.getPointDeVie());
+                        System.out.println("Bravo " + nomHeroChoisi + ", tu as maintenant " + Hero.getPointDeVie() + " points!");
 
                         // Passer à la salle suivante
                     }
