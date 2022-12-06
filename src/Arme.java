@@ -3,7 +3,7 @@ public abstract class Arme {
     // Attributs des armes
     protected String nomDeArme;
     protected int pointAttaqueArme;
-    protected int pointAttaqueBonus;
+    protected int pointAttaqueCritique;
     protected int tauxCoupCritique;
     protected int tauxAttaqueBonus;
     protected String nomAttaqueBonus;
@@ -13,8 +13,8 @@ public abstract class Arme {
         return this.pointAttaqueArme;
     }
 
-    protected int obtenirPointAttaqueBonus(){
-        return this.pointAttaqueBonus;
+    protected int obtenirPointAttaqueCritique(){
+        return this.pointAttaqueCritique;
     }
 
     protected int obtenirtauxCoupCritique(){
@@ -26,10 +26,23 @@ public abstract class Arme {
     }
 
     // Gestion de l'attaque bonus
-    protected void attaqueBonus(){
+    protected int attaqueBonus(){
         int tirageAleatoire = (int) (Math.random() * 100);
         if(tirageAleatoire <= this.tauxAttaqueBonus){
-            //System.out.println("Attaque bonus : " + this.getname());
+            return 0;//System.out.println("Attaque bonus : " + this.getname());
+        }else{
+            return  0;
+        }
+    }
+
+    protected int attaqueCoupCritique(Arme arme){
+        int tirageAleatoire = (int) (Math.random() * 100);
+        if(tirageAleatoire <= arme.obtenirtauxCoupCritique()){
+            System.out.println("tirage aléatoire = " + tirageAleatoire);
+            System.out.println("taux critique = " + arme.obtenirtauxCoupCritique());
+            return obtenirPointAttaqueCritique();
+        }else{
+            return  0;
         }
     }
 }

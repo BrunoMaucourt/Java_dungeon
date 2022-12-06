@@ -2,72 +2,29 @@ public class Personnage {
 
     //Atttributs
     protected int pointDeVie;
-    protected int attaquesDuHero;
-    protected int degatsRecus;
     protected boolean enVie;
 
     //Constructeur
-    Personnage (int PointDeVie, int attaquesDuHero, int degatsRecus, boolean enVie) {
-        this.pointDeVie = PointDeVie;
-        this.attaquesDuHero = attaquesDuHero;
-        this.degatsRecus = degatsRecus;
+    Personnage(int pointDeVie, boolean enVie) {
+        this.pointDeVie = pointDeVie;
         this.enVie = enVie;
     }
 
-    public int getPointDeVie() {
+    public int obtenirPointDeVie() {
         return pointDeVie;
     }
 
-    public void setPointDeVie(int pointDeVie) {
-        this.pointDeVie = pointDeVie;
-    }
-
-    public int getAttaquesDuHero() {
-        return attaquesDuHero;
-    }
-
-    public void setAttaquesDuHero(int attaquesDuHero) {
-        this.attaquesDuHero = attaquesDuHero;
-    }
-
-    public int getDegatsRecus() {
-        return degatsRecus;
-    }
-
-    public void setDegatsRecus(int degatsRecus) {
-        this.degatsRecus = degatsRecus;
+    public int attaque(Arme arme, int force) {
+        int degats = force + arme.obtenirPointAttaqueArme() + arme.attaqueCoupCritique(arme);
+        return degats;
     }
 
     public boolean isEnVie() {
-        return enVie;
-    }
-
-    public void setEnVie(boolean enVie) {
-        this.enVie = enVie;
-    }
-
-
-
-
-    /*public void set_PV ( int PV) throws ExceptionFinVie
-    {
-        if ( PV <= 0 )
-        {
-            throw new ExceptionFinVie("Le héros est mort.");
+        if (pointDeVie <= 0) {
+            this.enVie = true;
+        } else {
+            this.enVie = false;
         }
-        else
-        {
-            if ( PV <= this.PV_Depart )
-                this.PV = PV;
-            else this.PV = this.PV_Depart;
-        }
+        return this.enVie;
     }
-
-
-*/
-
 }
-
-
-//pk on fait les getters et setters ?
-//
