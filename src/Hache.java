@@ -1,8 +1,8 @@
 public class Hache extends ArmeMonstre{
-    Hache(String nomDeArme, int pointAttaqueArme, int pointAttaqueBonus, int tauxCoupCritique, int tauxAttaqueBonus,String nomAttaqueBonus){
+    Hache(String nomDeArme, int pointAttaqueArme, int pointAttaqueCritique, int tauxCoupCritique, int tauxAttaqueBonus,String nomAttaqueBonus){
         this.nomDeArme = nomDeArme;
         this.pointAttaqueArme = pointAttaqueArme;
-        this.pointAttaqueBonus = pointAttaqueBonus;
+        this.pointAttaqueCritique = pointAttaqueCritique;
         this.tauxCoupCritique = tauxCoupCritique;
         this.tauxAttaqueBonus = tauxAttaqueBonus;
         this.nomAttaqueBonus = nomAttaqueBonus;

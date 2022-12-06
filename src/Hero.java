@@ -2,8 +2,31 @@ public class Hero extends Personnage{
 
     //attributs
     protected String nomHero;
-    protected int armes;
+    protected String nomArme;
+
+    public int obtenirforceHero() {
+        return forceHero;
+    }
+
+    public void setForceHero(int forceHero) {
+        this.forceHero = forceHero;
+    }
+
+    protected int forceHero;
+    //protected int armes;
+
+    public ArmeHero[] listeArme = new ArmeHero[5];
     protected int potion;
+
+    public String getNomArme() {
+        return nomArme;
+    }
+
+    public void setNomArme(String nomArme) {
+        this.nomArme = nomArme;
+    }
+
+
 
     // getter and setter
     public int getPotion() {
@@ -20,19 +43,34 @@ public class Hero extends Personnage{
         this.nomHero = nomHero;
     }
 
-    public int getArmes() {
-        return armes;
-    }
 
-    public void setArmes(int armes) {
-        this.armes = armes;
-    }
 
     //constructeur
-    Hero (String nomHero, int PointDeVie, int attaquesDuHero, int degatsRecus, boolean enVie) {
-        super(PointDeVie, attaquesDuHero, degatsRecus, enVie);
+    Hero (String nomHero, int PointDeVie, boolean enVie) {
+        super(PointDeVie, enVie);
         this.nomHero = nomHero;
-        //Arme Arme = new Arme(1);
+        listeArme [0]=new Epee("épée", 10, 5,5, 5, "attaqueBonus");
+        listeArme [1]=new Lance("lance", 10, 5,5, 5, "attaqueBonus");
+        listeArme [2]=new Arc("arc", 10, 5,5, 5, "attaqueBonus");
+        listeArme [3]=new EauBenite("eau bénite", 10, 5,5, 5, "attaqueBonus");
+        listeArme [4]=new FlecheEnflammee("flèche enflammée", 10, 5,5, 5, "attaqueBonus");
+    }
+
+    public ArmeHero obtenirArmeUtilisee (String nomArme)
+    {
+        switch (nomArme){
+            case "epee":
+                return listeArme [0];
+            case "lance":
+                return listeArme [1];
+            case "arc":
+                return listeArme [2];
+            case "eau bénite":
+                return listeArme [3];
+            default :
+                return listeArme [4];
+
+        }
     }
 
     //méthode Perte Point de vie
@@ -46,6 +84,7 @@ public class Hero extends Personnage{
         pointDeVie = pointDeVie + (10* potionTrouvée);
         return pointDeVie;
     }
+
 
 }
 

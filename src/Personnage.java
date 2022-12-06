@@ -11,13 +11,19 @@ public class Personnage {
     }
 
     public int obtenirPointDeVie() {
-        return pointDeVie;
+        return this.pointDeVie;
     }
 
-    public int attaque(Arme arme, int force) {
+    public static int attaque(Arme arme, int force) {
         int degats = force + arme.obtenirPointAttaqueArme() + arme.attaqueCoupCritique(arme);
         return degats;
     }
+
+    public int pertePointDeVie (int attaque){
+        this.pointDeVie = pointDeVie - attaque;
+        return pointDeVie;
+    }
+
 
     public boolean isEnVie() {
         if (pointDeVie <= 0) {
