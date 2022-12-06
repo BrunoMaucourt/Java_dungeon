@@ -1,21 +1,33 @@
-public class Personnage {
+public abstract class Personnage {
 
     //Atttributs
     protected int pointDeVie;
+    protected int pointDeVieInitial;
+    protected int force;
     protected boolean enVie;
 
     //Constructeur
-    Personnage(int pointDeVie, boolean enVie) {
+    Personnage(int pointDeVie, int force, boolean enVie) {
         this.pointDeVie = pointDeVie;
+        this.pointDeVieInitial = pointDeVie;
+        this.force = force;
         this.enVie = enVie;
     }
 
     public int obtenirPointDeVie() {
-        return this.pointDeVie;
+        if(this.pointDeVie < 0){
+            return 0;
+        }else{
+            return this.pointDeVie;
+        }
     }
 
-    public static int attaque(Arme arme, int force) {
-        int degats = force + arme.obtenirPointAttaqueArme() + arme.attaqueCoupCritique(arme);
+    public int obtenirPointDeVieInitial() {
+        return this.pointDeVieInitial;
+    }
+
+    public int attaque(Arme arme) {
+        int degats = this.force + arme.obtenirPointAttaqueArme() + arme.attaqueCoupCritique(arme);
         return degats;
     }
 

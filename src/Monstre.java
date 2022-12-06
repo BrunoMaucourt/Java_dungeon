@@ -2,8 +2,13 @@ import org.w3c.dom.ls.LSOutput;
 
 public abstract class Monstre extends Personnage {
 
-    Monstre (int pointDeVie, boolean enVie) {
-    super(pointDeVie, enVie);
+    ArmeMonstre armeMonstre;
+
+    Monstre (int pointDeVie, int force, boolean enVie) {
+        super(pointDeVie, force, enVie);
     }
 
+    public ArmeMonstre obtenirArmeMonstre(){
+        return this.armeMonstre;
+    }
 }

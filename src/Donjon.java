@@ -7,7 +7,7 @@ public class Donjon {
     Donjon(int nombreDeSalle, String nomDonjon){
         this.nombreDeSalle = nombreDeSalle;
         this.nomDonjon = nomDonjon;
-        System.out.println(bienvenu + nomDonjon);
+        System.out.println(bienvenu + nomDonjon + "\n");
         // Créer la liste des salles
         this.listeSalle = new Salle [nombreDeSalle];
         for (int index = 0; index < nombreDeSalle; index ++){
@@ -19,18 +19,18 @@ public class Donjon {
         return this.nombreDeSalle;
     }
 
-    //Indique le type de monstre dans la pièce
+    // Renvoie le nom du monstre présent dans la pièce
     public static String afficherNomDuMonstre(Monstre monstre){
         if (monstre instanceof Voleur) {
-            return "un voleur!!!";
+            return "voleur";
         }else if(monstre instanceof Sorcier){
-            return "un sorcier!!!";
+            return "sorcier";
         }else if(monstre instanceof Troll){
-            return "un troll!!!";
+            return "troll";
         }else if(monstre instanceof Barbare){
-            return "un barbare!!!";
+            return "barbare";
         }else if(monstre instanceof Zombie){
-            return "un zombie!!!";
+            return "zombie";
         }
         return "erreur";
     }
