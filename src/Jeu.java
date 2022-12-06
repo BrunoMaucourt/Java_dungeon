@@ -31,6 +31,21 @@ public class Jeu {
                         System.out.println(donjon.listeSalle[indexSalle].afficherNomSalle());
                         System.out.println("Fais attention " + nomHeroChoisi + " vous allez affronter "+ Donjon.afficherNomDuMonstre(donjon.listeSalle[indexSalle].obtenirMonstreSalle()));
                         // Combat contre le monstre
+                        String choixDeArme;
+                        do {
+                            System.out.println("***TAPE LE NOM DE TON ARME***");
+                            System.out.println("Quelle arme souhaites-tu pour terrasser " + Donjon.afficherNomDuMonstre(donjon.listeSalle[indexSalle].obtenirMonstreSalle()) +" ?"
+                                    );
+                            System.out.println("1.arc");
+                            System.out.println("2.eau bénite");
+                            System.out.println("3.epée");
+                            System.out.println("4.flèche enflammée");
+                            System.out.println("5.lance");
+                            Scanner scannerStringArme = new Scanner(System.in);
+                            choixDeArme = scannerStringArme.nextLine().toLowerCase();
+
+                        } while (choixDeArme != "");
+
                         //Point de Vie avant-après attaque
                         System.out.println(nomHeroChoisi + " a " + Hero.getPointDeVie() + " points avant l'attaque du monstre");
                         //Perte de point de Vie après attaque
