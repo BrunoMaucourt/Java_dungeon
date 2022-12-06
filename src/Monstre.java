@@ -1,3 +1,8 @@
-public abstract class Monstre extends Personnage{
+public abstract class Monstre {
+
+    //Monstre (int PointDeVie, int attaquesDuHero, int degatsRecus, boolean enVie) {
+      //  super(PointDeVie, attaquesDuHero, degatsRecus, enVie);
+   // }
+
 
 }
