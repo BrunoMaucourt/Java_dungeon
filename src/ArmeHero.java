@@ -1,3 +1,3 @@
-public class ArmeHero extends Arme{
+public abstract class ArmeHero extends Arme{
 
 }

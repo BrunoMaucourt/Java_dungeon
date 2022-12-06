@@ -1,2 +1,2 @@
-public class ArmeMonstre extends Arme{
+public abstract class ArmeMonstre extends Arme{
 }
