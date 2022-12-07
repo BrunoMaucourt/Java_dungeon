@@ -16,6 +16,7 @@ public class Jeu {
         System.out.println("*** ECRIS TON NOM ***");
         String nomHeroChoisi = scannerMenuint.next();
         Hero hero = new Hero(nomHeroChoisi,100, 10,true );
+        int nombreDeSalle = 1;
         while (executionProgramme){
             do {
                 /*
@@ -31,9 +32,9 @@ public class Jeu {
                     executionProgramme = false;
                 }else if(choixMenu ==1){
                     // Lancement du jeu et création d'un donjon
-                    Donjon donjon = new Donjon(1, "de la terreur");
-                    // Boucle qui fais défiler les salles du donjon
-                    for (int indexSalle = 0; indexSalle < donjon.obtenirDonjonNombrePiece(); indexSalle++){
+                    Donjon donjon = new Donjon(nombreDeSalle);
+                    // Boucle qui fait défiler les salles du donjon
+                    for (int indexSalle = 0; indexSalle < donjon.obtenirDonjonNombreSalle(); indexSalle++){
                         /*
                         Entrée dans la pièce et description de celle-ci
                         Le numéro de la salle et le nom du monstre  présent sont stockés dans des variables
@@ -51,24 +52,23 @@ public class Jeu {
                             /*
                             On récupère l'arme choisie par l'utilisateur.
                             Pour éviter les problèmes de minuscules / majuscules, la réponse de l'utilisateur est convertie en minuscule
-                            Tant que la réponse en correspond pas aux armes de la liste du héros, on continue à poser la question
+                            Tant que la réponse ne correspond pas aux armes de la liste du héros, on continue à poser la question
                              */
                             String choixDeArme;
                             do {
                                 System.out.println("\n*** ECRIS LE NOM DE TON ARME ***");
                                 System.out.println("Quelle arme souhaites-tu pour terrasser le " + monstreActuel + " ?");
-                                System.out.println("- " + hero.listeArme[0].obtenirNomArme());
-                                System.out.println("- " + hero.listeArme[1].obtenirNomArme());
-                                System.out.println("- " + hero.listeArme[2].obtenirNomArme());
-                                System.out.println("- " + hero.listeArme[3].obtenirNomArme());
-                                System.out.println("- " + hero.listeArme[4].obtenirNomArme());
+                                // Boucle permettant d'afficher la liste des armes
+                                for (int iIndex = 0; iIndex < hero.obtenirNombreArmeHero() ; iIndex++){
+                                    System.out.println("- " + hero.obtenirNomArmeHero(iIndex));
+                                }
                                 Scanner scannerStringArme = new Scanner(System.in);
                                 choixDeArme = scannerStringArme.nextLine().toLowerCase();
-                            } while ( !choixDeArme.equals(hero.listeArme[0].obtenirNomArme())
-                                    && !choixDeArme.equals(hero.listeArme[1].obtenirNomArme())
-                                    && !choixDeArme.equals(hero.listeArme[2].obtenirNomArme())
-                                    && !choixDeArme.equals(hero.listeArme[3].obtenirNomArme())
-                                    && !choixDeArme.equals(hero.listeArme[4].obtenirNomArme())
+                            } while ( !choixDeArme.equals(hero.obtenirNomArmeHero(0))
+                                    && !choixDeArme.equals(hero.obtenirNomArmeHero(1))
+                                    && !choixDeArme.equals(hero.obtenirNomArmeHero(2))
+                                    && !choixDeArme.equals(hero.obtenirNomArmeHero(3))
+                                    && !choixDeArme.equals(hero.obtenirNomArmeHero(4))
                             );
                             /*
                             Combat contre le monstre
@@ -87,7 +87,7 @@ public class Jeu {
                             System.out.println("Il reste "+ donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirPointDeVie() + " / " + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirPointDeVieInitial() + " points de vie au " + monstreActuel);
 
                             System.out.println("\n----------------------");
-                            System.out.println("Le " + monstreActuel +" ta attaqué avec son " + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeMonstre().obtenirNomArme());
+                            System.out.println("Le " + monstreActuel +" t'as attaqué avec son arme (" + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeMonstre().obtenirNomArme() + ")");
                             int degatsAttaqueMonstre = donjon.listeSalle[indexSalle].obtenirMonstreSalle().attaque(donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeMonstre());
                             System.out.println("Puissance de l'attaque : " + degatsAttaqueMonstre + " points de dégats !");
                             //Point de Vie avant-après attaque
@@ -104,7 +104,8 @@ public class Jeu {
                          */
                         System.out.println("\n----------------------");
                         System.out.println("Tu fouilles la pièce");
-
+                        // todo : boucle while pour savoir si on veut fouiller la pièce
+                        // todo : boucle while pour savoir si on veut utiliser la potion
                         //imaginons qu'il y a 1 potion sur le monstre
                         hero.gainPointDeVie(3);
                         System.out.println("Tu as trouvé une potion de vie sur le cadavre du monstre !");

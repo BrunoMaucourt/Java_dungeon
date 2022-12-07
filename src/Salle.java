@@ -23,7 +23,7 @@ public class Salle {
             case 3:
                 // Ajouter sorcier
                 this.nomSalle = "la bibliothèque maudite";
-                monstre = new Sorcier(100, 2,true);
+                monstre = new Sorcier(75, 2,true);
                 break;
             case 4:
                 // Ajouter barbare

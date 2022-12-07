@@ -1,10 +1,10 @@
 public class Hero extends Personnage{
 
     //attributs
-    protected String nomHero;
+    private String nomHero;
     protected String nomArme;
     protected int potion;
-    public ArmeHero[] listeArme = new ArmeHero[5];
+    private ArmeHero[] listeArme = new ArmeHero[5];
 
     //constructeur
     Hero (String nomHero, int PointDeVie, int force, boolean enVie) {
@@ -32,6 +32,14 @@ public class Hero extends Personnage{
                 return listeArme [4];
 
         }
+    }
+
+    public String obtenirNomArmeHero (int numeroArme) {
+        return listeArme[numeroArme].obtenirNomArme();
+    }
+
+    public int obtenirNombreArmeHero() {
+        return listeArme.length;
     }
 
     //méthode Perte Point de vie

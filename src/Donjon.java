@@ -2,20 +2,23 @@ public class Donjon {
     public  int nombreDeSalle;
     public String bienvenu = "Bienvenu dans le donjon ";
     public String nomDonjon;
+    public String[] listeNomDonjon = {"de la terreur", "du nécromencien", "des marais", "maudit", "des succubes", "des quatre vents", "des démons"};
     public Salle[] listeSalle;
 
-    Donjon(int nombreDeSalle, String nomDonjon){
+    Donjon(int nombreDeSalle){
         this.nombreDeSalle = nombreDeSalle;
-        this.nomDonjon = nomDonjon;
-        System.out.println(bienvenu + nomDonjon + "\n");
+        // Choisir un nom aléatoire de donjon
+        int choisirNom = (int) (Math.random() * listeNomDonjon.length);
+        this.nomDonjon = listeNomDonjon[choisirNom];
+        System.out.println("\n" + bienvenu + nomDonjon + "\n");
         // Créer la liste des salles
         this.listeSalle = new Salle [nombreDeSalle];
         for (int index = 0; index < nombreDeSalle; index ++){
             this.listeSalle[index] = new Salle();
         }
     }
-    //Getter qui permet d'obtenir le nombre de pièce du donjon
-    public int obtenirDonjonNombrePiece(){
+    //Getter qui permet d'obtenir le nombre de salle du donjon
+    public int obtenirDonjonNombreSalle(){
         return this.nombreDeSalle;
     }
 
