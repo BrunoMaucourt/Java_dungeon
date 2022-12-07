@@ -36,9 +36,8 @@ public abstract class Personnage {
         return pointDeVie;
     }
 
-
     public boolean isEnVie() {
-        if (pointDeVie <= 0) {
+        if (pointDeVie < 0) {
             this.enVie = true;
         } else {
             this.enVie = false;

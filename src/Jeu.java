@@ -1,6 +1,7 @@
+import java.io.IOException;
 import java.util.Scanner;
 public class Jeu {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         boolean executionProgramme = true;
         int choixMenu;
@@ -10,12 +11,14 @@ public class Jeu {
         System.out.println("*   un jeu d'Andy, Aurélie et Bruno");
         System.out.println("*");
         System.out.println("*************************\n\n\n\n");
+        //Sauvegarde.sauvegarder();
+        //Sauvegarde.charger();
         // Création du héro
         Scanner scannerMenuint = new Scanner(System.in);
         System.out.println("Quel est ton nom héros ?  ");
         System.out.println("*** ECRIS TON NOM ***");
         String nomHeroChoisi = scannerMenuint.next();
-        Hero hero = new Hero(nomHeroChoisi,100, 10,true );
+        Hero hero = new Hero(nomHeroChoisi,10, 10,true);
         int nombreDeSalle = 1;
         while (executionProgramme){
             do {
@@ -37,14 +40,16 @@ public class Jeu {
                     for (int indexSalle = 0; indexSalle < donjon.obtenirDonjonNombreSalle(); indexSalle++){
                         /*
                         Entrée dans la pièce et description de celle-ci
-                        Le numéro de la salle et le nom du monstre  présent sont stockés dans des variables
+                        Le numéro de la salle et le nom du monstre présent sont stockés dans des variables
                         */
                         int numeroPiece = indexSalle+1;
                         String monstreActuel = Donjon.afficherNomDuMonstre(donjon.listeSalle[indexSalle].obtenirMonstreSalle());
+                        String faiblesse = donjon.afficherFaiblesse(donjon.listeSalle[indexSalle].obtenirMonstreSalle());
                         System.out.println("\n----------------------");
                         System.out.println("Piece n° "+ numeroPiece);
                         System.out.println(donjon.listeSalle[indexSalle].afficherNomSalle());
                         System.out.println("Fais attention " + nomHeroChoisi + " tu vas affronter un "+ monstreActuel + " !");
+                        System.out.println("Conseils pour les petits joueurs : le "+ monstreActuel+ " est sensible à " + faiblesse);
 
                         // Combat contre le monstre : en continue tant que le monstre a des points de vie
                         // todo : voir quand le joueur n'a plus de points de vie
@@ -96,8 +101,14 @@ public class Jeu {
                             //todo : faire les points en fonctions du monstre
                             hero.pertePointDeVie(degatsAttaqueMonstre);
                             System.out.println("Il te reste " + hero.obtenirPointDeVie() + " / " + hero.obtenirPointDeVieInitial()  + " points après l'attaque du " + monstreActuel);
-                        }
 
+                            if(hero.isEnVie() == false){
+                                System.out.println("Tu as perdu la partie");
+                                System.out.println("Retourne à la salle de musculation");
+
+                            }
+
+                        }
                         /*
                         Le combat est finis et le héros a gagné
                         On peut récupérer un objet dans la pièce
@@ -117,8 +128,13 @@ public class Jeu {
                     System.out.println("\n----------------------");
                     System.out.println("Bravo " + nomHeroChoisi + " tu es arrivé dans la dernière pièce du donjon.");
                     System.out.println("Tu as gagné cette partie mais oseras tu affronter un autre donjon ?\n");
+
+                    /*
+                    Menu pour sauvegarder
+
+                    */
                 }
-            }while(choixMenu < 1 || choixMenu> 2 );
+            }while(choixMenu < 1 || choixMenu> 2);
         }
     }
 }

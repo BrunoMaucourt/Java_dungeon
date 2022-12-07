@@ -37,4 +37,19 @@ public class Donjon {
         }
         return "erreur";
     }
+
+    public String afficherFaiblesse(Monstre monstre){
+        if (monstre instanceof Voleur) {
+            return "l'arc";
+        }else if(monstre instanceof Sorcier){
+            return "l'eau bénite";
+        }else if(monstre instanceof Troll){
+            return "la lance";
+        }else if(monstre instanceof Barbare){
+            return "l'épée";
+        }else if(monstre instanceof Zombie){
+            return "la flèche enflammée";
+        }
+        return "erreur";
+    }
 }
