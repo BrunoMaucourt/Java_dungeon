@@ -28,7 +28,6 @@ public class Jeu {
                 System.out.println("1. Oui, je suis prêt");
                 System.out.println("2. Non, j'ai trop peur");
                 choixMenu = scannerMenuint.nextInt();
-                System.out.println("Choix menu");
                 if (choixMenu == 2){
                     System.out.println("Reviens quand tu auras grandi petit aventurier.");
                     executionProgramme = false;
@@ -51,25 +50,33 @@ public class Jeu {
                             System.out.println("Fais attention " + nomHeroChoisi + " tu vas affronter un " + monstreActuel + " !");
                             System.out.println("Conseils pour les petits joueurs : le " + monstreActuel + " est sensible à " + faiblesse);
 
-                            // Combat contre le monstre : en continue tant que le monstre a des points de vie
+                            // Combat contre le monstre : on continue tant que le monstre a des points de vie
                             while (donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirPointDeVie() > 0 && hero.enVie()) {
-                                    /*
+                                /*
                                     On récupère l'arme choisie par l'utilisateur.
                                     Pour éviter les problèmes de minuscules / majuscules, la réponse de l'utilisateur est convertie en minuscule
                                     Tant que la réponse ne correspond pas aux armes de la liste du héros, on continue à poser la question
-                                     */
-                                System.out.println("\n----------------------");
-                                System.out.println("Le " + monstreActuel + " t'as attaqué avec son arme (" + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeMonstre().obtenirNomArme() + ")");
-                                int degatsAttaqueMonstre = donjon.listeSalle[indexSalle].obtenirMonstreSalle().attaque(donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeMonstre());
-                                System.out.println("Puissance de l'attaque : " + degatsAttaqueMonstre + " points de dégats !");
-                                //Point de Vie avant-après attaque
-                                System.out.println("Tu avais " + hero.obtenirPointDeVie() + " points de vie avant l'attaque du " + monstreActuel);
-                                //Perte de point de Vie après attaque
-                                hero.pertePointDeVie(degatsAttaqueMonstre);
-                                System.out.println("Il te reste " + hero.obtenirPointDeVie() + " / " + hero.obtenirPointDeVieInitial() + " points après l'attaque du " + monstreActuel);
-                                // Vérifier si le héro est toujours vivant
-                                hero.modifierStatusVie();
-                                if (hero.enVie()) {
+                                */
+                                if(Personnage.passerTourMonstre == false){
+                                    System.out.println("\n----------------------");
+                                    System.out.println("Le " + monstreActuel + " t'as attaqué avec son arme (" + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeMonstre().obtenirNomArme() + ")");
+                                    int degatsAttaqueMonstre = donjon.listeSalle[indexSalle].obtenirMonstreSalle().attaque(donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeMonstre());
+                                    System.out.println("Puissance de l'attaque : " + degatsAttaqueMonstre + " points de dégats !");
+                                    //Point de Vie avant-après attaque
+                                    System.out.println("Tu avais " + hero.obtenirPointDeVie() + " points de vie avant l'attaque du " + monstreActuel);
+                                    //Perte de point de Vie après attaque
+                                    hero.pertePointDeVie(degatsAttaqueMonstre);
+                                    System.out.println("Il te reste " + hero.obtenirPointDeVie() + " / " + hero.obtenirPointDeVieInitial() + " points après l'attaque du " + monstreActuel);
+                                    Arme.effetAttaqueBonus(Arme.probabiliteAttaqueBonus(donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeMonstre()),
+                                            donjon.listeSalle[indexSalle].obtenirMonstreSalle(),
+                                            hero,
+                                            donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeMonstre());
+                                    // Vérifier si le héro est toujours vivant
+                                    hero.modifierStatusVie();
+                                }else{
+                                    Personnage.passerTourMonstre = false;
+                                }
+                                if (hero.enVie() && Personnage.passerTourHero == false) {
                                     String choixDeArme;
                                     do {
                                         System.out.println("\n*** ECRIS LE NOM DE TON ARME ***");
@@ -91,8 +98,6 @@ public class Jeu {
                                     Les dégats sont calculés puis stockés dans une variable
                                     Le nombre de point de vie restant est ensuite calculé
                                      */
-
-                                    //TODO : CHANGER LA PUISSANCE DES DEGATS EN FONCTION DE LA PUISSANCE ET DU MONSTRE
                                     System.out.println("\n----------------------");
                                     System.out.println("Tu as attaqué avec ton " + choixDeArme);
                                     int degatsAttaqueJoueur = (int) (hero.attaque(hero.obtenirArmeUtilisee(choixDeArme))*donjon.degatsFaiblesse(hero.obtenirArmeUtilisee(choixDeArme),donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeFaiblesse() ));
@@ -100,6 +105,12 @@ public class Jeu {
                                     System.out.println("Le " + monstreActuel + " avait " + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirPointDeVie() + " points de vie avant ton attaque");
                                     donjon.listeSalle[indexSalle].obtenirMonstreSalle().pertePointDeVie(degatsAttaqueJoueur);
                                     System.out.println("Il reste " + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirPointDeVie() + " / " + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirPointDeVieInitial() + " points de vie au " + monstreActuel);
+                                    Arme.effetAttaqueBonus(Arme.probabiliteAttaqueBonus(hero.obtenirArmeUtilisee(choixDeArme)),
+                                            hero,
+                                            donjon.listeSalle[indexSalle].obtenirMonstreSalle(),
+                                            hero.obtenirArmeUtilisee(choixDeArme));
+                                }else{
+                                    Personnage.passerTourHero = false;
                                 }
                             }
                             /*

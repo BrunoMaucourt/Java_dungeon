@@ -4,6 +4,8 @@ public abstract class Personnage {
     protected int pointDeVie;
     protected int pointDeVieInitial;
     protected int force;
+    static boolean passerTourMonstre = false;
+    static boolean passerTourHero = false;
 
     //Constructeur
     Personnage(int pointDeVie, int force) {
@@ -38,7 +40,12 @@ public abstract class Personnage {
     }
 
     public int gainPointDeVie (int pointDeVie) {
-        this.pointDeVie += pointDeVie;
+        int pointDeVieTemporaire = this.pointDeVie + pointDeVie;
+        if (pointDeVieTemporaire < this.pointDeVieInitial){
+            this.pointDeVie += pointDeVie;
+        }else{
+            this.pointDeVie = this.pointDeVieInitial;
+        }
         return pointDeVie;
     }
     public int pertePointDeVie (int attaque){
