@@ -69,4 +69,8 @@ public abstract class Personnage {
         this.pointDeVie=0;
         return pointDeVie;
     }
+
+    public void modifierPointDeVie(int pointDeVie){
+        this.pointDeVie = pointDeVie;
+    }
 }

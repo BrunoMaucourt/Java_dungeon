@@ -5,7 +5,9 @@ public class PotionDeForce extends Potion{
 
     void appliquerEffet(Personnage cible) {
         cible.ajouterForce(valeurEffet);
-        System.out.println("Tu as trouvé une potion de force");
-        System.out.println("Tu as gagné " + valeurEffet + " points de force");
+        if(cible instanceof Hero){
+            System.out.println("Tu as trouvé une potion de force");
+            System.out.println("Tu as gagné " + valeurEffet + " points de force");
+        }
     }
 }

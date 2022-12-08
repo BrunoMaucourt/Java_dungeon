@@ -4,6 +4,7 @@ public class Hero extends Personnage{
     private String nomHero;
     protected boolean enVie;
     private static ArmeHero[] listeArme = new ArmeHero[5];
+    private int score;
 
     //constructeur
     Hero (String nomHero, int PointDeVie, int force, boolean enVie) {
@@ -45,6 +46,17 @@ public class Hero extends Personnage{
         return this.nomHero;
     }
 
+    public void modifierNomHero(String nouveauNom){
+        this.nomHero = nouveauNom;
+    }
+    public int obtenirScore() {
+        return this.score;
+    }
+    public int augmenterScore(int valeur){
+        this.score = this.score + valeur;
+        return this.score;
+    }
+
     //méthode Perte Point de vie
     public int pertePointDeVie (int attaqueDuMechant){
         /*
@@ -75,4 +87,5 @@ public class Hero extends Personnage{
     public boolean enVie() {
         return this.enVie;
     }
+
 }

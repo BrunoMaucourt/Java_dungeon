@@ -76,10 +76,10 @@ public abstract class Arme {
                 cible.pertePointDeVie(10);
                 System.out.println("Il reste " + cible.obtenirPointDeVie() + " / " + cible.obtenirPointDeVieInitial() + " points de vie");
             }else if(arme instanceof Hache){
-                System.out.println("Effet : la hache de ton adversaire était bien aiguisée");
-                System.out.println("Tu perd 10 points de vie");
-                cible.pertePointDeVie(10);
-                System.out.println("Il te reste " + cible.obtenirPointDeVie() + " / " + cible.obtenirPointDeVieInitial() + " points après l'attaque");
+                int gainForce = 10;
+                System.out.println("Effet : le barbare devient enragé, il gagne "+ gainForce +" points de force");
+                PotionDeForce potionForce = new PotionDeForce(gainForce);
+                potionForce.appliquerEffet(attaquant);
             }else if(arme instanceof Lance){
                 System.out.println("Effet : le monstre a été transpercé par la lance");
                 System.out.println("Il perd 10 points de vie");
