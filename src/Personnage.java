@@ -24,11 +24,23 @@ public abstract class Personnage {
         return this.pointDeVieInitial;
     }
 
+    public int obtenirForce(){
+        return this.force;
+    }
+
+    public void ajouterForce(int valeurEffet){
+        this.force += valeurEffet;
+    }
+
     public int attaque(Arme arme) {
         int degats = this.force + arme.obtenirPointAttaqueArme() + arme.attaqueCoupCritique(arme);
         return degats;
     }
 
+    public int gainPointDeVie (int pointDeVie) {
+        this.pointDeVie += pointDeVie;
+        return pointDeVie;
+    }
     public int pertePointDeVie (int attaque){
         this.pointDeVie = pointDeVie - attaque;
         return pointDeVie;

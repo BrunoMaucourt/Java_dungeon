@@ -13,27 +13,27 @@ public class Salle {
             case 1:
                 // Ajouter voleur
                 this.nomSalle = "la salle des cauchemars";
-                monstre = new Voleur(90, -5);
+                monstre = new Voleur(90, -5, Hero.obtenirArmeUtilisee("arc"));
                 break;
             case 2:
                 // Ajouter troll
                 this.nomSalle =  "les oubliettes de l'effroi";
-                monstre = new Troll(120, 5);
+                monstre = new Troll(120, 5,Hero.obtenirArmeUtilisee("lance"));
                 break;
             case 3:
                 // Ajouter sorcier
                 this.nomSalle = "la bibliothèque maudite";
-                monstre = new Sorcier(75, 2);
+                monstre = new Sorcier(75, 2,Hero.obtenirArmeUtilisee("eau bénite"));
                 break;
             case 4:
                 // Ajouter barbare
                 this.nomSalle = "la salle sanguinaire";
-                monstre = new Barbare(100, 5);
+                monstre = new Barbare(100, 5,Hero.obtenirArmeUtilisee("épée"));
                 break;
             default:
                 // Ajouter zombie
                 this.nomSalle = "les toilettes de l'horreur";
-                monstre = new Zombie(50, 0);
+                monstre = new Zombie(50, 0,Hero.obtenirArmeUtilisee("fleche enflammee"));
                 break;
         }
     }

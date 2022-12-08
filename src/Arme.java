@@ -42,7 +42,7 @@ public abstract class Arme {
     protected int attaqueCoupCritique(Arme arme){
         int tirageAleatoire = (int) (Math.random() * 100);
         if(tirageAleatoire <= arme.obtenirtauxCoupCritique()){
-            System.out.println("Coup critique !");
+            System.out.println("Coup critique,  " + obtenirPointAttaqueCritique() + " dégats en plus !");
             return obtenirPointAttaqueCritique();
         }else{
             return  0;

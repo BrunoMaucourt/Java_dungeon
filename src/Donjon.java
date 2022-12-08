@@ -52,4 +52,12 @@ public class Donjon {
         }
         return "erreur";
     }
+
+    public Double degatsFaiblesse(Arme armeUtilise, Arme faiblesseArme){
+        if(armeUtilise == faiblesseArme){
+            return 1.5;
+        }else{
+            return 1.0;
+        }
+    }
 }

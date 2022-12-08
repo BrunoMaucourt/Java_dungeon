@@ -3,7 +3,7 @@ public class Hero extends Personnage{
     //attributs
     private String nomHero;
     protected boolean enVie;
-    private ArmeHero[] listeArme = new ArmeHero[5];
+    private static ArmeHero[] listeArme = new ArmeHero[5];
 
     //constructeur
     Hero (String nomHero, int PointDeVie, int force, boolean enVie) {
@@ -18,9 +18,9 @@ public class Hero extends Personnage{
     }
 
     // Getter
-    public ArmeHero obtenirArmeUtilisee (String nomArme) {
+    public static ArmeHero obtenirArmeUtilisee (String nomArme) {
         switch (nomArme){
-            case "epee":
+            case "épée":
                 return listeArme [0];
             case "lance":
                 return listeArme [1];
@@ -30,7 +30,6 @@ public class Hero extends Personnage{
                 return listeArme [3];
             default :
                 return listeArme [4];
-
         }
     }
 
@@ -46,10 +45,6 @@ public class Hero extends Personnage{
         return this.nomHero;
     }
 
-    public int obtenirForce(){
-        return this.force;
-    }
-
     //méthode Perte Point de vie
     public int pertePointDeVie (int attaqueDuMechant){
         /*
@@ -62,12 +57,6 @@ public class Hero extends Personnage{
         }else{
             pointDeVie = 0;
         }
-        return pointDeVie;
-    }
-
-    //méthode pour augmenter les points de vie
-    public int gainPointDeVie (int pointDeVie) {
-        this.pointDeVie += pointDeVie;
         return pointDeVie;
     }
 

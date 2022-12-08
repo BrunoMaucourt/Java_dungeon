@@ -95,45 +95,68 @@ public class Jeu {
                                     //TODO : CHANGER LA PUISSANCE DES DEGATS EN FONCTION DE LA PUISSANCE ET DU MONSTRE
                                     System.out.println("\n----------------------");
                                     System.out.println("Tu as attaqué avec ton " + choixDeArme);
-                                    int degatsAttaqueJoueur = hero.attaque(hero.obtenirArmeUtilisee(choixDeArme));
+                                    int degatsAttaqueJoueur = (int) (hero.attaque(hero.obtenirArmeUtilisee(choixDeArme))*donjon.degatsFaiblesse(hero.obtenirArmeUtilisee(choixDeArme),donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirArmeFaiblesse() ));
                                     System.out.println("Puissance de l'attaque : " + degatsAttaqueJoueur + " points de dégats !");
                                     System.out.println("Le " + monstreActuel + " avait " + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirPointDeVie() + " points de vie avant ton attaque");
                                     donjon.listeSalle[indexSalle].obtenirMonstreSalle().pertePointDeVie(degatsAttaqueJoueur);
                                     System.out.println("Il reste " + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirPointDeVie() + " / " + donjon.listeSalle[indexSalle].obtenirMonstreSalle().obtenirPointDeVieInitial() + " points de vie au " + monstreActuel);
                                 }
                             }
-                                /*
+                            /*
                                 Le combat est finis et le héros a gagné
                                 On peut récupérer un objet dans la pièce
-                                 */
+                            */
                             if (hero.enVie()) {
                                 System.out.println("\n----------------------");
-                                System.out.println("Tu fouilles la pièce");
-                                // todo : boucle while pour savoir si on veut fouiller la pièce
-                                // todo : boucle while pour savoir si on veut utiliser la potion
-                                //imaginons qu'il y a 1 potion sur le monstre
-                                hero.gainPointDeVie(30);
-                                System.out.println("Tu as trouvé une potion de vie sur le cadavre du monstre !");
-                                System.out.println("Bravo " + nomHeroChoisi + ", tu as maintenant " + hero.obtenirPointDeVie() + " points de vie !");
-
-                                // Fin de la pièce, on passe à la suivante (ou au trésor à la fin de la boucle)
+                                System.out.println("Tu as battu le monstre");
+                                System.out.println("Veux tu fouiller la pièce du donjon ?");
+                                System.out.println("*** CHOISIS ***");
+                                System.out.println("1. Oui, j'espère trouver un trésor");
+                                System.out.println("2. Non, je veux continuer à avancer dans le donjon");
+                                int choixFouille = scannerMenuint.nextInt();
+                                if (choixFouille == 1) {
+                                    /*
+                                        On trouve une potion
+                                     */
+                                    int nombrePotionMax = 3;
+                                    int nombrePotionMin = 1;
+                                    int intervallePotion = nombrePotionMax - nombrePotionMin + 1;
+                                    // Choisir un nombre aléatoire correspondant au type de monstre
+                                    int typePotion = (int) (Math.random() * intervallePotion) + nombrePotionMin;
+                                    if (typePotion == 1) {
+                                        // potion de vie
+                                        PotionDeVie potionVie = new PotionDeVie(30);
+                                        potionVie.appliquerEffet(hero);
+                                    }else if(typePotion ==2) {
+                                        // potion de force
+                                        PotionDeForce potionForce = new PotionDeForce(10);
+                                        potionForce.appliquerEffet(hero);
+                                    }else {
+                                        // potion toxique
+                                        PotionToxique potionToxique = new PotionToxique(10);
+                                        potionToxique.appliquerEffet(hero);
+                                        hero.modifierStatusVie();
+                                    }
+                                }
                             }
+                            // Fin de la pièce, on passe à la suivante (ou au trésor à la fin de la boucle)
                         }
                     }
-                    if (hero.enVie()) {
-                        // Sortie des salles, la partie est finie
-                        System.out.println("\n----------------------");
-                        System.out.println("Bravo " + nomHeroChoisi + " tu es arrivé dans la dernière pièce du donjon.");
-                        System.out.println("Tu as gagné cette partie mais oseras tu affronter un autre donjon ?\n");
+                }
+                if (hero.enVie()) {
+                    // Sortie des salles, la partie est finie
+                    System.out.println("\n----------------------");
+                    System.out.println("Bravo " + nomHeroChoisi + " tu es arrivé dans la dernière pièce du donjon.");
+                    System.out.println("Tu as gagné cette partie mais oseras tu affronter un autre donjon ?\n");
 
-                        /*
-                            Menu pour sauvegarder
-                        */
-                        System.out.println("\n----------------------");
-                        System.out.println("Veux tu sauvegarder ta progression avant le prohcain donjon ?");
+                    /*
+                           Menu pour sauvegarder
+                    */
+                    System.out.println("\n----------------------");
+                    System.out.println("Veux tu sauvegarder ta progression avant le prohcain donjon ?");
                         System.out.println("*** CHOISIS ***");
                         System.out.println("1. Oui, je veux sauvegarder et faire une pause ici");
-                        System.out.println("2. Non, je veux foncer dans le prohcain donjon");
+                        System.out.println("2. Non, je veux foncer dans le prochain donjon");
                         int choixSauvegarde = scannerMenuint.nextInt();
                         if (choixSauvegarde == 1) {
                             Sauvegarde.sauvegarder(hero.obtenirNomHero(),
@@ -149,7 +172,6 @@ public class Jeu {
                         hero.gainPointDeVie(hero.obtenirPointDeVieInitial());
                         hero.modifierStatusVie();
                     }
-                }
             }while(choixMenu < 1 || choixMenu> 2);
         }
     }
