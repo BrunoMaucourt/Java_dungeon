@@ -34,6 +34,18 @@ public abstract class Personnage {
         this.force += valeurEffet;
     }
 
+    public void modifierForce(int valeurEffet){
+        this.force = valeurEffet;
+    }
+
+    public void ajouterPointDeVieMax(int valeurEffet){
+        this.pointDeVieInitial += valeurEffet;
+    }
+
+    public void modifierPointDeVieInitial(int valeurEffet){
+        this.pointDeVieInitial = valeurEffet;
+    }
+
     public int attaque(Arme arme) {
         int degats = this.force + arme.obtenirPointAttaqueArme() + arme.attaqueCoupCritique(arme);
         return degats;
@@ -50,6 +62,11 @@ public abstract class Personnage {
     }
     public int pertePointDeVie (int attaque){
         this.pointDeVie = pointDeVie - attaque;
+        return pointDeVie;
+    }
+
+    public int pertePointDeVieTotal(){
+        this.pointDeVie=0;
         return pointDeVie;
     }
 }

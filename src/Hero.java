@@ -10,7 +10,7 @@ public class Hero extends Personnage{
         super(PointDeVie, force);
         this.nomHero = nomHero;
         this.enVie = enVie;
-        listeArme [0]=new Epee("épée", 10, 5,5, 5, "attaqueBonus");
+        listeArme [0]=new Epee("épée", 10, 5,5, 1, "attaqueBonus");
         listeArme [1]=new Lance("lance", 10, 5,5, 5, "attaqueBonus");
         listeArme [2]=new Arc("arc", 10, 5,5, 5, "attaqueBonus");
         listeArme [3]=new EauBenite("eau bénite", 10, 5,5, 5, "attaqueBonus");

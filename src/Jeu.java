@@ -16,7 +16,9 @@ public class Jeu {
         System.out.println("*** ECRIS TON NOM ***");
         String nomHeroChoisi = scannerMenuint.next();
         // Création du héro
-        Hero hero = new Hero(nomHeroChoisi,100, 10,true);
+        int VALEURVIEHEROINITIAL = 100;
+        int VALEURFORCEHEROINITIAL = 10;
+        Hero hero = new Hero(nomHeroChoisi,VALEURVIEHEROINITIAL, VALEURFORCEHEROINITIAL,true);
         int nombreDeSalle = 2;
         while (executionProgramme){
             do {
@@ -128,12 +130,9 @@ public class Jeu {
                                 if (choixFouille == 1) {
                                     /*
                                         On trouve une potion
+                                        Le type de potion est choisi aléatoirement
                                      */
-                                    int nombrePotionMax = 3;
-                                    int nombrePotionMin = 1;
-                                    int intervallePotion = nombrePotionMax - nombrePotionMin + 1;
-                                    // Choisir un nombre aléatoire correspondant au type de monstre
-                                    int typePotion = (int) (Math.random() * intervallePotion) + nombrePotionMin;
+                                    int typePotion =Potion.choisirPotionAleatoire();
                                     if (typePotion == 1) {
                                         // potion de vie
                                         PotionDeVie potionVie = new PotionDeVie(30);
@@ -141,7 +140,21 @@ public class Jeu {
                                     }else if(typePotion ==2) {
                                         // potion de force
                                         PotionDeForce potionForce = new PotionDeForce(10);
-                                        potionForce.appliquerEffet(hero);
+                                        if(hero.obtenirForce() < 40){
+                                            potionForce.appliquerEffet(hero);
+                                        }else{
+                                            System.out.println("Tu as trouvé une potion de force");
+                                            System.out.println("In n'y a pas d'effet car ta force est déjà à son maximum (le dopage n'est pas autorisé ici)");
+                                        }
+                                    }else if(typePotion ==3) {
+                                        // potion de PV max
+                                        PotionDeVieMax potionDeVieMax = new PotionDeVieMax(10);
+                                        if(hero.obtenirPointDeVieInitial() < 190){
+                                            potionDeVieMax.appliquerEffet(hero);
+                                        }else {
+                                            System.out.println("Tu as trouvé une potion augmentant le nombre de points vie maximum");
+                                            System.out.println("In n'y a pas d'effet car ton nombre de point de vie est déjà à son maximum (le dopage n'est pas autorisé ici)");
+                                        }
                                     }else {
                                         // potion toxique
                                         PotionToxique potionToxique = new PotionToxique(10);
@@ -150,10 +163,10 @@ public class Jeu {
                                     }
                                 }
                             }
-                            // Fin de la pièce, on passe à la suivante (ou au trésor à la fin de la boucle)
                         }
                     }
                 }
+                // Fin de la pièce, on passe à la suivante (ou au trésor à la fin de la boucle)
                 if (hero.enVie()) {
                     // Sortie des salles, la partie est finie
                     System.out.println("\n----------------------");
@@ -179,8 +192,11 @@ public class Jeu {
                             Le hero a perdu la partie
                             On lui redonne ses points de vie initiaux pour la prochaine partie
                             On remet le booléen enVie à la valeur true
+                            On remet aux valeurs initiales les valeurs de vie et de forces qui ont été augmentées par les potions
                          */
                         hero.gainPointDeVie(hero.obtenirPointDeVieInitial());
+                        hero.modifierPointDeVieInitial(VALEURVIEHEROINITIAL);
+                        hero.modifierForce(VALEURFORCEHEROINITIAL);
                         hero.modifierStatusVie();
                     }
             }while(choixMenu < 1 || choixMenu> 2);

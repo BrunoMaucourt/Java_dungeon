@@ -66,9 +66,9 @@ public abstract class Arme {
                 Personnage.passerTourHero = true;
                 System.out.println("Il te reste " + cible.obtenirPointDeVie() + " / " + cible.obtenirPointDeVieInitial() + " points après l'attaque");
             }else if(arme instanceof Epee){
-                System.out.println("Effet : le monstre est sonné par le coup d'épée");
-                System.out.println("Il perd 10 points de vie");
-                cible.pertePointDeVie(10);
+                System.out.println("Effet : le monstre est découpé en deux par le coup d'épée");
+                System.out.println("Il perd tous ses points de vie");
+                cible.pertePointDeVieTotal();
                 System.out.println("Il reste " + cible.obtenirPointDeVie() + " / " + cible.obtenirPointDeVieInitial() + " points de vie");
             }else if(arme instanceof FlecheEnflammee){
                 System.out.println("Effet : le monstre a pris feu");
