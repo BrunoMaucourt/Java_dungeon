@@ -18,7 +18,6 @@ public class Sauvegarde {
         try {
             ligne = lecture.readLine();
             while (ligne != null) {
-
                 // affichage de la ligne
                 System.out.println(ligne);
 
@@ -30,21 +29,20 @@ public class Sauvegarde {
         }
     }
 
-    public static void sauvegarder() throws IOException {
+    public static void sauvegarder(String nomHero, int nombrePointDeVie, int forceHero) throws IOException {
 
         // Création d’un fileReader pour lire le fichier
         FileWriter fileWriter = new FileWriter(filePath + "/src/sauvegarde.txt");
 
         // Création d’un bufferedReader qui utilise le fileReader
         BufferedWriter ecriture = new BufferedWriter(fileWriter);
+        System.out.println("Ta partie a été sauvegardée");
 
-        ecriture.write("test");
+        ecriture.write(nomHero);
         ecriture.newLine();
-        ecriture.write("Gateaux");
+        ecriture.write(Integer.toString(nombrePointDeVie));
+        ecriture.newLine();
+        ecriture.write(Integer.toString(forceHero));
         ecriture.close();
-    }
-
-    public void enregistrerDonnees(){
-
     }
 }

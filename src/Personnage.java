@@ -4,14 +4,12 @@ public abstract class Personnage {
     protected int pointDeVie;
     protected int pointDeVieInitial;
     protected int force;
-    protected boolean enVie;
 
     //Constructeur
-    Personnage(int pointDeVie, int force, boolean enVie) {
+    Personnage(int pointDeVie, int force) {
         this.pointDeVie = pointDeVie;
         this.pointDeVieInitial = pointDeVie;
         this.force = force;
-        this.enVie = enVie;
     }
 
     public int obtenirPointDeVie() {
@@ -34,14 +32,5 @@ public abstract class Personnage {
     public int pertePointDeVie (int attaque){
         this.pointDeVie = pointDeVie - attaque;
         return pointDeVie;
-    }
-
-    public boolean isEnVie() {
-        if (pointDeVie < 0) {
-            this.enVie = true;
-        } else {
-            this.enVie = false;
-        }
-        return this.enVie;
     }
 }

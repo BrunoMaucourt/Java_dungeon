@@ -2,14 +2,14 @@ public class Hero extends Personnage{
 
     //attributs
     private String nomHero;
-    protected String nomArme;
-    protected int potion;
+    protected boolean enVie;
     private ArmeHero[] listeArme = new ArmeHero[5];
 
     //constructeur
     Hero (String nomHero, int PointDeVie, int force, boolean enVie) {
-        super(PointDeVie, force, enVie);
+        super(PointDeVie, force);
         this.nomHero = nomHero;
+        this.enVie = enVie;
         listeArme [0]=new Epee("épée", 10, 5,5, 5, "attaqueBonus");
         listeArme [1]=new Lance("lance", 10, 5,5, 5, "attaqueBonus");
         listeArme [2]=new Arc("arc", 10, 5,5, 5, "attaqueBonus");
@@ -42,15 +42,48 @@ public class Hero extends Personnage{
         return listeArme.length;
     }
 
+    public String obtenirNomHero(){
+        return this.nomHero;
+    }
+
+    public int obtenirForce(){
+        return this.force;
+    }
+
     //méthode Perte Point de vie
     public int pertePointDeVie (int attaqueDuMechant){
-        pointDeVie = pointDeVie - attaqueDuMechant;
+        /*
+            Système pour éviter que le nombre de point de vie descende en dessous de 0
+            Sinon lors de la prochaine partie, le héro commence avec un nombre de point vie négatif
+         */
+        int pointDeVieTemporaire = pointDeVie - attaqueDuMechant;
+        if(pointDeVieTemporaire > 0){
+            pointDeVie = pointDeVie - attaqueDuMechant;
+        }else{
+            pointDeVie = 0;
+        }
         return pointDeVie;
     }
 
-    //méthode pour augmenter les points de vie après potion
-    public int gainPointDeVie (int potionTrouvée) {
-        pointDeVie = pointDeVie + (10* potionTrouvée);
+    //méthode pour augmenter les points de vie
+    public int gainPointDeVie (int pointDeVie) {
+        this.pointDeVie += pointDeVie;
         return pointDeVie;
+    }
+
+    public boolean modifierStatusVie() {
+        if (pointDeVie > 0) {
+            this.enVie = true;
+        } else {
+            this.enVie = false;
+            System.out.println("\n----------------------");
+            System.out.println("Tu as perdu la partie");
+            System.out.println("Retourne à la salle de musculation avant de retenter ta chance");
+        }
+        return this.enVie;
+    }
+
+    public boolean enVie() {
+        return this.enVie;
     }
 }

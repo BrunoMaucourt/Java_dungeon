@@ -4,8 +4,8 @@ public abstract class Monstre extends Personnage {
 
     ArmeMonstre armeMonstre;
 
-    Monstre (int pointDeVie, int force, boolean enVie) {
-        super(pointDeVie, force, enVie);
+    Monstre (int pointDeVie, int force) {
+        super(pointDeVie, force);
     }
 
     public ArmeMonstre obtenirArmeMonstre(){
