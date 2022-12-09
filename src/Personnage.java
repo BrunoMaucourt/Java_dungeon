@@ -1,3 +1,7 @@
+/**
+ * Classe donnant naissance à héro et monstre
+ * Contient les méthodes communes aux deux
+ */
 public abstract class Personnage {
 
     //Atttributs
@@ -7,7 +11,11 @@ public abstract class Personnage {
     static boolean passerTourMonstre = false;
     static boolean passerTourHero = false;
 
-    //Constructeur
+    /**
+     * Constructeur
+     * @param pointDeVie
+     * @param force
+     */
     Personnage(int pointDeVie, int force) {
         this.pointDeVie = pointDeVie;
         this.pointDeVieInitial = pointDeVie;
@@ -46,11 +54,23 @@ public abstract class Personnage {
         this.pointDeVieInitial = valeurEffet;
     }
 
+    /**
+     * Méthode pour attaquer
+     * L'attaque est basée sur la force du personnage, celle de son arme et le coup critique (si celui-ci a lieu)
+     * @param arme
+     * @return
+     */
     public int attaque(Arme arme) {
         int degats = this.force + arme.obtenirPointAttaqueArme() + arme.attaqueCoupCritique(arme);
         return degats;
     }
 
+    /**
+     * Méthode permettant de rajouter des points de vie au personnsage
+     * Si les points reçus sont supérieurs à ceux maximum, on reste bloquer à ceux-ci
+     * @param pointDeVie
+     * @return le nombre de points de vie après le gain
+     */
     public int gainPointDeVie (int pointDeVie) {
         int pointDeVieTemporaire = this.pointDeVie + pointDeVie;
         if (pointDeVieTemporaire < this.pointDeVieInitial){

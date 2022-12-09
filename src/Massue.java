@@ -1,3 +1,6 @@
+/**
+ * Classe correspondant à l'une des armes des monstres
+ */
 public class Massue extends ArmeMonstre{
     Massue(String nomDeArme, int pointAttaqueArme, int pointAttaqueCritique, int tauxCoupCritique, int tauxAttaqueBonus,String nomAttaqueBonus){
         this.nomDeArme = nomDeArme;

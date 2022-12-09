@@ -1,3 +1,6 @@
+/**
+ * Classe abstraite donnant naissance à ArmeHero et ArmeMonstre
+ */
 public abstract class Arme {
 
     // Attributs des armes
@@ -9,30 +12,61 @@ public abstract class Arme {
     protected String nomAttaqueBonus;
 
     // Getter pour récupérer les informations des armes
+    /**
+     * indique le nombre de points de dommage de l'arme
+     * @return
+     */
     protected int obtenirPointAttaqueArme(){
         return this.pointAttaqueArme;
     }
 
+    /**
+     * Indique le nombre de points de dommage de l'arme lors d'un coup critique
+     * @return le nombre de dommages
+     */
     protected int obtenirPointAttaqueCritique(){
         return this.pointAttaqueCritique;
     }
 
+    /**
+     * Indique la probabilité d'un coup critique
+     * @return le pourcentage de la probabilité
+     */
     protected int obtenirTauxCoupCritique(){
         return this.tauxCoupCritique;
     }
+
+    /**
+     * Indique la probabilité d'une attaque bonus
+     * @return le pourcentage de la probabilité
+     */
     protected int obtenitTauxAttaqueBonus(){
         return this.tauxAttaqueBonus;
     }
 
+    /**
+     * Indique le nom de l'attaque bonus
+     * @return
+     */
     protected String obtenirnomAttaqueBonus(){
         return this.nomAttaqueBonus;
     }
 
+    /**
+     * Indique le nom de l'arme
+     * @return le nom de l'arme sous forme de chaine de caractère
+     */
     protected String obtenirNomArme(){
         return this.nomDeArme;
     }
 
     // Gestion de l'attaque bonus
+
+    /**
+     * Méthode permettant de déterminer si l'attaque bonus a lieu ou pas
+     * @param arme utilisée
+     * @return valeur booléen
+     */
     protected static boolean probabiliteAttaqueBonus(Arme arme){
         int tirageAleatoire = (int) (Math.random() * 100);
         if(tirageAleatoire <= arme.obtenitTauxAttaqueBonus()){
@@ -41,6 +75,15 @@ public abstract class Arme {
             return false;
         }
     }
+
+    /**
+     * L'Attaque bonus se lance après l'attaque "normale" si une certaine probabilité est atteinte
+     * Les effets de cette attaque varient selon l'arme qui est utilisée
+     * @param condition indique si l'attaque bonus a lieu ou pas
+     * @param attaquant indique qui lance l'attaque spéciale
+     * @param cible indique qui est la cible
+     * @param arme indique l'arme utilisée
+     */
     protected static void effetAttaqueBonus(boolean condition, Personnage attaquant, Personnage cible, Arme arme){
         if(condition == true){
             System.out.println("****");
@@ -98,7 +141,16 @@ public abstract class Arme {
             }
         }
     }
+
+    /**
+     * Calcul la probabilité du coup critique
+     * Si la probabilité est atteinte les points d'attaques critiques sont renvoyés
+     * Un message s'affiche pour indiquer qu'un coup critique a été effectué
+     * @param arme utilisée pour l'attaque
+     * @return le nombre de points de dommages causés par le coup critique (peut être nul)
+     */
     protected int attaqueCoupCritique(Arme arme){
+        // Nombre aléatoire entre 0 et 100
         int tirageAleatoire = (int) (Math.random() * 100);
         if(tirageAleatoire <= arme.obtenirTauxCoupCritique()){
             System.out.println("****");

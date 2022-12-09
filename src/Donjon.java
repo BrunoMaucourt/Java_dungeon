@@ -1,3 +1,7 @@
+/**
+ * La classe donjon permet de créer les salles
+ * Elle contient également plusieurs méthodes nécessaires au cours du jeu
+ */
 public class Donjon {
     public  int nombreDeSalle;
     public String bienvenu = "Bienvenu dans le donjon ";
@@ -5,6 +9,11 @@ public class Donjon {
     public String[] listeNomDonjon = {"de la terreur", "du nécromencien", "des marais", "maudit", "des succubes", "des quatre vents", "des démons"};
     public Salle[] listeSalle;
 
+    /**
+     * Créer un donjon et affiche son nom (choisi aléatoirement)
+     * Créer les salles du donjon
+     * @param nombreDeSalle
+     */
     Donjon(int nombreDeSalle){
         this.nombreDeSalle = nombreDeSalle;
         // Choisir un nom aléatoire de donjon
@@ -22,7 +31,11 @@ public class Donjon {
         return this.nombreDeSalle;
     }
 
-    // Renvoie le nom du monstre présent dans la pièce
+    /**
+     * Affiche le nom du monstre
+     * @param monstre
+     * @return une chaine de caractère avec le nom du monstre
+     */
     public static String afficherNomDuMonstre(Monstre monstre){
         if (monstre instanceof Voleur) {
             return "voleur";
@@ -38,6 +51,11 @@ public class Donjon {
         return "erreur";
     }
 
+    /**
+     * Indique la faiblesse du monstre
+     * @param monstre
+     * @return une chaine de caractère avec l'arme du héro contre laquelle le monstre est faible
+     */
     public String afficherFaiblesse(Monstre monstre){
         if (monstre instanceof Voleur) {
             return "l'arc";

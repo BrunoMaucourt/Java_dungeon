@@ -1,3 +1,6 @@
+/**
+ * Classe pour l'armse morsure associée au zombie
+ */
 public class Morsure extends ArmeMonstre{
     Morsure(String nomDeArme, int pointAttaqueArme, int pointAttaqueCritique, int tauxCoupCritique, int tauxAttaqueBonus,String nomAttaqueBonus){
         this.nomDeArme = nomDeArme;

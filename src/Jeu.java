@@ -1,8 +1,10 @@
 import java.io.IOException;
 import java.util.Scanner;
-
 import static java.lang.Integer.parseInt;
 
+/**
+ * Classe principale du jeu
+ */
 public class Jeu {
     public static void main(String[] args) throws IOException {
 
@@ -12,9 +14,13 @@ public class Jeu {
          */
         boolean executionProgramme = true;
         int choixMenu;
-        int nombreDeSalle = 2;
-        int VALEURVIEHEROINITIAL = 100;
-        int VALEURFORCEHEROINITIAL = 10;
+        int nombreDeSalle = 5;
+        final int VALEURVIEHEROINITIAL = 200;
+        final int VALEURFORCEHEROINITIAL = 10;
+        final int VALEURPOTIONVIE = 30;
+        final int VALEURPOTIONTOXIQUE = 10;
+        final int VALEURPOTIONFORCE = 10;
+        final int VALEURPOTIONVIEMAX = 10;
         Hero hero = new Hero("Hero",VALEURVIEHEROINITIAL, VALEURFORCEHEROINITIAL,true);
         int choixMenuPrincipal;
         boolean finMenuPrincipal = false;
@@ -30,11 +36,15 @@ public class Jeu {
         while (finMenuPrincipal == false){
             System.out.println("\n\nBienvenu dans JAVA dungeon.");
             do{
-                System.out.println("*** CHOISIS ***");
+                System.out.println("\n*** CHOISIS ***");
                 System.out.println("1. Commencer une nouvelle partie");
                 System.out.println("2. Charger une ancienne partie");
                 System.out.println("3. Quitter le jeu");
                 choixMenuPrincipal = scannerMenu.nextInt();
+                if(choixMenuPrincipal != 1 && choixMenuPrincipal != 2 && choixMenuPrincipal != 3){
+                    System.out.println("\n*****");
+                    System.out.println("Fais le bon choix si tu ne veux pas être mordu par un vampire");
+                }
             }while(choixMenuPrincipal != 1 && choixMenuPrincipal != 2 && choixMenuPrincipal != 3);
         /*
         En fonction du choix du joueur
@@ -163,8 +173,8 @@ public class Jeu {
                                             && !choixDeArme.equals(hero.obtenirNomArmeHero(4))
                                     );
                                     /*
-                                    Combat contre le monstre
-                                    Les dégats sont calculés puis stockés dans une variable
+                                    Attaque du joueur contre le monstre
+                                    Les dégâts sont calculés puis stockés dans une variable
                                     Le nombre de point de vie restant est ensuite calculé
                                      */
                                     System.out.println("\n----------------------");
@@ -204,30 +214,31 @@ public class Jeu {
                                     int typePotion = Potion.choisirPotionAleatoire();
                                     if (typePotion == 1) {
                                         // potion de vie
-                                        PotionDeVie potionVie = new PotionDeVie(30);
+                                        PotionDeVie potionVie = new PotionDeVie(VALEURPOTIONVIE);
                                         potionVie.appliquerEffet(hero);
                                     } else if (typePotion == 2) {
                                         // potion de force
-                                        PotionDeForce potionForce = new PotionDeForce(10);
-                                        if (hero.obtenirForce() < 40) {
+                                        PotionDeForce potionForce = new PotionDeForce(VALEURPOTIONFORCE);
+                                        if (hero.obtenirForce() < VALEURFORCEHEROINITIAL + 50) {
                                             potionForce.appliquerEffet(hero);
                                         } else {
                                             System.out.println("Tu as trouvé une potion de force");
-                                            System.out.println("In n'y a pas d'effet car ta force est déjà à son maximum (le dopage n'est pas autorisé ici)");
+                                            System.out.println("Il n'y a pas d'effet car ta force est déjà à son maximum (le dopage n'est pas autorisé ici)");
                                         }
                                     } else if (typePotion == 3) {
                                         // potion de PV max
-                                        PotionDeVieMax potionDeVieMax = new PotionDeVieMax(10);
-                                        if (hero.obtenirPointDeVieInitial() < 190) {
+                                        PotionDeVieMax potionDeVieMax = new PotionDeVieMax(VALEURPOTIONVIEMAX);
+                                        if (hero.obtenirPointDeVieInitial() < VALEURVIEHEROINITIAL + 100) {
                                             potionDeVieMax.appliquerEffet(hero);
                                         } else {
                                             System.out.println("Tu as trouvé une potion augmentant le nombre de points vie maximum");
-                                            System.out.println("In n'y a pas d'effet car ton nombre de point de vie est déjà à son maximum (le dopage n'est pas autorisé ici)");
+                                            System.out.println("Il n'y a pas d'effet car ton nombre de point de vie est déjà à son maximum (le dopage n'est pas autorisé ici)");
                                         }
                                     } else {
                                         // potion toxique
-                                        PotionToxique potionToxique = new PotionToxique(10);
+                                        PotionToxique potionToxique = new PotionToxique(VALEURPOTIONTOXIQUE);
                                         potionToxique.appliquerEffet(hero);
+                                        // Vérifier si le joueur est toujours vivant après avoir perdu de la vie
                                         hero.modifierStatusVie();
                                     }
                                 }
@@ -239,13 +250,14 @@ public class Jeu {
                         // Sortie des salles, la partie est finie
                         System.out.println("\n----------------------");
                         System.out.println("Bravo " + hero.obtenirNomHero() + " tu es arrivé dans la dernière pièce du donjon.");
-                        PotionDeVie potionVie = new PotionDeVie(30);
+                        PotionDeVie potionVie = new PotionDeVie(VALEURPOTIONVIE);
                         potionVie.appliquerEffet(hero);
                         hero.augmenterScore(1);
                         System.out.println("Tu as terminé " + hero.obtenirScore() + " donjons !");
-                    /*
-                           Menu pour sauvegarder
-                    */
+                        /*
+                           Menu pour sauvegarder la partie
+                           Les données du héro sont récupérées puis sauvegarder
+                        */
                         System.out.println("\n----------------------");
                         System.out.println("Veux tu sauvegarder ta progression avant le prohcain donjon ?");
                         System.out.println("*** CHOISIS ***");
