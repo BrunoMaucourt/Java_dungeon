@@ -271,6 +271,9 @@ public class Jeu {
                                     hero.obtenirForce(),
                                     hero.obtenirScore());
                         }
+
+                        System.out.println("\n----------------------");
+                        System.out.println("Tu as gagné cette partie mais oseras tu affronter un autre donjon ?\n");
                     } else {
                         /*
                             Le hero a perdu la partie
@@ -283,8 +286,6 @@ public class Jeu {
                         hero.modifierForce(VALEURFORCEHEROINITIAL);
                         hero.modifierStatusVie();
                     }
-                    System.out.println("\n----------------------");
-                    System.out.println("Tu as gagné cette partie mais oseras tu affronter un autre donjon ?\n");
                 }
             }while(choixMenu < 1 || choixMenu> 2);
         }
