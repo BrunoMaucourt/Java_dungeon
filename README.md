@@ -6,6 +6,8 @@ Java Dungeon est un jeu inspiré des premiers RPG de type Dungeon and Dragon. Il
 
 Ce projet a été codé par Andy, Aurélie et Bruno.
 
+![Capture d'écran du menu d'accueil de Java Dungeon](https://raw.githubusercontent.com/BrunoMaucourt/Java_dungeon/main/Screenshots/Java_Dungeon.png)
+
 ## Projet réalisé par :
 
 Andy PHILETAS
@@ -28,4 +30,4 @@ Oracle open JDK 19
 
 ## Capture d'écran :
 
-Oracle open JDK 19
+![Capture d'écran du menu d'accueil de Java Dungeon](https://raw.githubusercontent.com/BrunoMaucourt/Java_dungeon/main/Screenshots/Java_Dungeon_2.png)
